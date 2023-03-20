@@ -1,28 +1,27 @@
 {
   "name": "drone-spa",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "analyze": "source-map-explorer dist/BillingTimeSPA/**/*.js --no-border-checks"
+    "analyze": "source-map-explorer dist/DroneSPA/**/*.js --no-border-checks"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^15.1.5",
-    "@angular/cdk": "^12.2.12",
-    "@angular/common": "^12.2.17",
-    "@angular/compiler": "^12.2.15",
-    "@angular/core": "^12.2.15",
-    "@angular/forms": "^12.2.17",
-    "@angular/material": "^12.2.13",
-    "@angular/platform-browser": "15.2.3",
-    "@angular/platform-browser-dynamic": "^15.1.5",
-    "@angular/router": "^12.2.15",
-    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@angular/animations": "~15.1.5",
+    "@angular/common": "~15.1.5",
+    "@angular/compiler": "~15.1.5",
+    "@angular/core": "~15.1.5",
+    "@angular/forms": "~15.1.5",
+    "@angular/platform-browser": "~15.1.5",
+    "@angular/platform-browser-dynamic": "~15.1.5",
+    "@angular/router": "~15.1.5",
     "heatmap.js": "^2.0.5",
     "leaflet": "^1.9.3",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
@@ -41,13 +40,19 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^12.2.15",
-    "@angular/cli": "^12.2.15",
-    "@angular/compiler-cli": "^12.2.15",
+    "@angular-devkit/build-angular": "^15.1.6",
+    "@angular/cli": "^15.1.6",
+    "@angular/compiler-cli": "~15.1.5",
+    "@types/jasmine": "~3.8.0",
+    "@types/leaflet": "^1.7.5",
     "@types/node": "^12.11.1",
-    "@typescript-eslint/eslint-plugin": "^5.10.2",
-    "@typescript-eslint/parser": "^5.10.2",
-    "eslint": "^8.8.0",
-    "typescript": "^4.3.5"
+    "jasmine-core": "~3.8.0",
+    "karma": "~6.3.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.0.3",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "~1.7.0",
+    "typescript": "~4.0.2",
+    "eslint": "^8.8.0"
   }
 }
