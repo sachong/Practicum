@@ -15,9 +15,10 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./map.component.scss'],
   providers: [NgbModal],
 })
-export class AdvancedTimeComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
+  editorOptions: any;
 
   toast = false; 
   toastError = false; 

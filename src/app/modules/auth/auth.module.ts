@@ -19,7 +19,7 @@ import { LoginCallbackComponent } from './pages/login-callback/login-callback.co
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from '@modules/layout/layout.component';
 import { ContentModule } from '@modules/content/content.module';
-import { MapComponent } from '@modules/content/pages/map/map.component';
+//import { MapComponent } from '@modules/content/pages/map/map.component';
 import { GoogleSigninSplashComponent } from './pages/google-signin-splash/google-signin-splash.component';
 
 const routes: Routes = [

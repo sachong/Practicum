@@ -9,7 +9,7 @@ import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-soc
 import { HttpClient } from '@angular/common/http';
 import { OAuth2Client } from 'google-auth-library';
 import { MapService } from '@services/map.service';
-import { GoogleToken } from '@models/google-token';
+// import { GoogleToken } from '@models/google-token';
 import { GoogleAuthService } from '@services/google-auth.service';
 import { OAuthService } from 'angular-oauth2-oidc';
 
