@@ -1,12 +1,15 @@
 {
-  "name": "heatmap",
+  "name": "drone-spa",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+  
   },
   "private": true,
   "dependencies": {
@@ -22,7 +25,9 @@
     "leaflet": "^1.9.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "devextreme": "^21.1.3",
+    "devextreme-angular": "^21.1.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.1.6",

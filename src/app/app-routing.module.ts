@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeatmapComponent } from './heatmap/heatmap.component';
-import { InputFileComponent } from './input-file/input-file.component';
+import { AuthGuardService } from 'src/app/modules/auth/auth-guard.service';
+import { AuthModule } from 'src/app/modules/auth/auth.module';
+import { ContentModule } from 'src/app/modules/content/content.module';
+import { LayoutComponent } from 'src/app/modules/layout/layout.component';
 
 const routes: Routes = [
-  {path: 'input-file', component: InputFileComponent},
-  {path: 'heatmap', component: HeatmapComponent}
-
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: '',
+    canActivate: [AuthGuardService],
+    component: LayoutComponent,
+    loadChildren: () => ContentModule
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), AuthModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

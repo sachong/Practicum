@@ -1,0 +1,37 @@
+<div class="container" style="min-width:100%; max-width: 100%;">
+  <div class="row">
+    <div class="col button-position p-2">
+    <div *ngIf="!layoutService.isScreenTooSmall">
+        <div class="col-sm-3 col-lg-2" [ngClass]="{'pl-1': layoutService.isSidebarToggled && !layoutService.isScreenTooSmall}"
+          style="align-self: center;">
+            <button *ngIf="!layoutService.isSidebarToggled" class="btn btn-secondary text-white"
+              (click)="onToggleSidebar()"><i
+                class="fas fa-bars"></i></button>
+            <button *ngIf="layoutService.isSidebarToggled" class="btn btn-secondary text-white"
+              (click)="onToggleSidebar()"><i
+                class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <div *ngIf="layoutService.isScreenTooSmall">
+      <div *ngIf="!layoutService.isSidebarToggled"> 
+        <div>
+            <button class="btn btn-secondary text-white"
+             (click)="onToggleSidebar()"><i
+             class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div *ngIf="layoutService.isSidebarToggled"> 
+        <button  class="btn btn-secondary text-white"
+        (click)="onToggleSidebar()"><i
+        class="fas fa-bars"></i></button>
+      </div>
+    </div>
+    </div>
+    <div class="col d-sm-none">
+      <a><p class="p-2" style="float: right; font-size: x-small;">Logged in as: {{user.Email}}</p></a>
+    </div>
+    <div class="col d-none d-sm-block">
+      <a><p class="p-2" style="float: right;">Logged in as: {{user.Email}}</p></a>
+    </div>
+  </div>
+</div>

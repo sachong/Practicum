@@ -1,10 +1,5 @@
-<h1>{{title}}</h1>
-<nav>
-
-  <button (click)="onLoadInputFile()">Input File</button>
-  <button (click)="onLoadHeatMap()">Heat Map</button>
-  <app-input-file *ngIf="loadInputFile" (fileDataEvent)="setFileData($event)"></app-input-file>
-  <app-heatmap *ngIf="loadHeatMap" [fileData]="fileData"></app-heatmap>
-
-</nav>
-<br>
+<div class="mat-app-background" [ngClass]="{'dark-theme-mode': isDarkMode}">
+  <span class="body">
+      <router-outlet></router-outlet>
+  </span>
+</div>

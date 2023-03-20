@@ -1,0 +1,39 @@
+.main-container {
+    min-height: 100vh; /* will cover the 100% of viewport */
+    display: block;
+    position: relative;
+    padding-bottom: 80px; /* height of your footer */
+}
+
+.main-sidebar-active {
+    transition: all 0.1s linear;
+    @media screen and (min-width: 866px){
+        padding-left: 210px; //change this based on the sidebar width
+    }
+    @media screen and (max-width: 866px) {
+        padding-left: 0px;
+    }
+}
+.main-sidebar-shrunk {
+    padding-left: 70px;
+    transition: all 0.1s linear;
+}
+
+.sidebar {
+    padding: 0px;
+    height: 100%;
+    width: max-content;
+    position: fixed;
+    z-index: 3;
+    background-color: #002E40;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    transition: all 0.1s linear;
+}
+
+.header {
+    border-bottom: thin solid var(--gray);
+}

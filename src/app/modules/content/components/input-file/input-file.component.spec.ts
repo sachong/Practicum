@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeatmapComponent } from './heatmap.component';
+import { InputFileComponent } from './input-file.component';
 
-describe('HeatmapComponent', () => {
-  let component: HeatmapComponent;
-  let fixture: ComponentFixture<HeatmapComponent>;
+describe('InputFileComponent', () => {
+  let component: InputFileComponent;
+  let fixture: ComponentFixture<InputFileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeatmapComponent ]
+      declarations: [ InputFileComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HeatmapComponent);
+    fixture = TestBed.createComponent(InputFileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

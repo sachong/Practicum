@@ -1,28 +1,32 @@
 import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-
+import { AuthService } from 'src/app/modules/auth/auth.service';
+import { DarkModeService } from 'src/app/services/dark-mode.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
+  isDarkMode : boolean;
+  title = 'DroneSPA';
 
-  title = 'heatmap';
-  loadInputFile = false;
-  loadHeatMap = false;
-
-  @Input() fileData = '';
-
-  onLoadInputFile(){
-    this.loadInputFile = !this.loadInputFile;
+  constructor(private authService: AuthService, private darkModeService: DarkModeService) {
+    
+    this.authService.runInitialLoginSequence();
+    this.getDarkMode();
   }
 
-  onLoadHeatMap(){
-    this.loadHeatMap = !this.loadHeatMap;
-  }
-
-  setFileData(fileData: string){
-    this.fileData = (JSON.parse(fileData));
+  getDarkMode() {
+    // We have to manually add the dark theme mode class to the body since the darkModeservice cannot access the body tag
+    this.darkModeService.getDarkMode().subscribe(result => {
+      this.isDarkMode = result;
+      let body = document.getElementsByTagName('body')[0];
+      if (this.isDarkMode) {
+        body.classList.add("dark-theme-mode");
+      } else {
+        body.classList.remove("dark-theme-mode"); 
+      }
+    });
   }
 }

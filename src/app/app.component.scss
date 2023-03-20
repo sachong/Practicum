@@ -1,0 +1,19 @@
+::ng-deep .dx-datagrid-headers {
+    color: var(--text-color);
+}
+
+::ng-deep .dx-datagrid-group-panel .dx-group-panel-message {
+    color: var(--text-color);
+}
+
+::ng-deep .dx-datebox-calendar .dx-dropdowneditor-icon::before {
+    content: "\f073";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #7EC9E8;
+    vertical-align: middle;
+}
+
+::ng-deep h4 {
+    font-weight:bold
+}

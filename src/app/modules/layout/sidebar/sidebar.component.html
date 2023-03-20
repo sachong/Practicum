@@ -1,0 +1,56 @@
+  <nav id="sidebar">
+    <div [ngClass]="{'sidebar-header-toggled': layoutService.isSidebarToggled && !layoutService.isScreenTooSmall}">
+      <div *ngIf="!layoutService.isSidebarToggled">
+        <div class="col pr-0" [ngClass]="{'sidebar-header-shrunk': !layoutService.isSidebarToggled }">
+          <h5 style="color:white;">BT</h5>
+        </div>
+      </div>
+      <div *ngIf="layoutService.isSidebarToggled && !layoutService.isScreenTooSmall" class="container"
+        [ngClass]="{'sidebar-header': layoutService.isSidebarToggled }">
+        <img (click)="onToggleSidebar()" src="" class="full-logo" style="width: 180px;">
+      </div>
+    </div>
+
+    <ul class="list-unstyled components">
+      <li>
+        <a *ngIf="layoutService.isSidebarToggled && !layoutService.isScreenTooSmall" [routerLink]="['/map']"
+          [ngClass]="{'active': routeCheck('map')}"><i class="fas px-2 fa-tasks"></i>
+          <span style="padding-left: 5px">Map</span></a>
+        <a *ngIf="!layoutService.isSidebarToggled" [routerLink]="['/map']"
+          [ngClass]="{'active': routeCheck('map')}" class="container text-center" data-toggle="tooltip"
+          data-placement="right" title="Map"><i class="fas px-2 fa-tasks"></i></a>
+      </li>
+     
+
+    </ul>
+
+    <hr class="m-0">
+    <div *ngIf="layoutService.isSidebarToggled && !layoutService.isScreenTooSmall" class="row">
+      <div class="col-4 text-right">
+        <i class="fas fa-sun" style="color: white; float: right; margin-top: 0.7rem;"></i>
+      </div>
+      <div class="col-4">
+        <mat-slide-toggle class="m-2" [(ngModel)]="isDarkMode" [color]="color" (change)="setDarkMode()"
+          style="padding-left: 2px; padding-bottom: 25px; color: white; flex: 50%;">
+        </mat-slide-toggle>
+      </div>
+      <div class="col-4">
+        <i class="fas fa-moon" style="margin-top: 0.7rem; float: left; color: white;"></i>
+      </div>
+    </div>
+    <div *ngIf="!layoutService.isSidebarToggled" class="row">
+      <div class="row">
+        <mat-slide-toggle [(ngModel)]="isDarkMode" [color]="color" (change)="setDarkMode()"
+          style="margin-left: 12px; padding-bottom: 25px; color: white;">
+        </mat-slide-toggle>
+      </div>
+      <div *ngIf="!isDarkMode" class="container text-center">
+        <i class="fas fa-sun m-2" style="color: white;"></i>
+      </div>
+      <div *ngIf="isDarkMode" class="container text-center">
+        <i class="fas fa-moon m-2" style="color: white;"></i>
+      </div>
+    </div>
+  </nav>
+
+
