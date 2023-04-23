@@ -3,6 +3,7 @@ import { FlightPlan , FlightPlanCommand } from '../../models/flight-plan.model'
 import { FlightPlanService } from '../../services/flight-plan.service';
 import { Location } from "src/app/models/location";
 import { MapService } from "src/app/services/map.service";
+import { MapsAPILoader } from '@agm/core';
 
 
 
@@ -20,13 +21,28 @@ export class MapComponent implements OnInit {
   markers: { lat: number; lng: number; draggable: boolean }[] = [];
 
   constructor(private flightPlanService: FlightPlanService,
-                private mapService: MapService) {}
+              private mapService: MapService,
+              private mapsAPILoader: MapsAPILoader) {}
 
   ngOnInit() {
     this.getLocation();
+    this.setMapCenterToAddress("3100 Jefferson Ave, El Paso, TX 79930");
   }
 
-
+  setMapCenterToAddress(address: string) {
+    this.mapsAPILoader.load().then(() => {
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: address }, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          this.lat = results[0].geometry.location.lat();
+          this.lng = results[0].geometry.location.lng();
+        } else {
+          console.error("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    });
+  }
+  
  
   getLocation(){
     this.mapService.getLocations().subscribe(
@@ -240,3 +256,4 @@ export class MapComponent implements OnInit {
     }
   }
 }
+
