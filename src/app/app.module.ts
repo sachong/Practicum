@@ -16,20 +16,38 @@ import { ComponentsModule } from "./components/components.module";
 import  { AgmCoreModule } from '@agm/core';
 import { environment } from "src/environments/environment";
 
+import { AuthService } from './services/auth.service';
+import { ReactiveFormsModule } from '@angular/forms'; 
+
+import { BrowserModule } from "@angular/platform-browser";
+
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+
+
+import { NavigationComponent } from "./components/navigation/navigation.component";
+import { SignupComponent } from "./components/signup/signup.component";
+import { LoginComponent } from "./components/login/login.component";
+import { HomeComponent } from "./components/home/home.component";
+
+
+
+
+
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    ComponentsModule,
-    CommonModule,
-    NgbModule,
-    RouterModule,
-    AppRoutingModule,
-    ToastrModule.forRoot()
-  ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, SignupComponent, LoginComponent, HomeComponent],
+    providers: [AuthService],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        ComponentsModule,
+        CommonModule,
+        NgbModule,
+        RouterModule,
+        AppRoutingModule,
+        ToastrModule.forRoot(),
+        ReactiveFormsModule,
+    ]
 })
 export class AppModule {}

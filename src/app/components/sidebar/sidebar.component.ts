@@ -35,6 +35,14 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-single-02",
     class: ""
   },
+
+  {
+    path: "/login",
+    title: "Login!",
+    rtlTitle: " ",
+    icon: "icon-single-02",
+    class: ""
+  }
 ];
 
 @Component({
