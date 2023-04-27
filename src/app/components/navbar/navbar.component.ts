@@ -4,12 +4,16 @@ import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
+import { AuthService } from "src/app/services/auth.service";
+
+
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  isAuthenticated = false;
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;
@@ -24,6 +28,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     location: Location,
     private element: ElementRef,
     private router: Router,
+    private authService: AuthService,
     private modalService: NgbModal
   ) {
     this.location = location;
@@ -41,6 +46,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
      }
    };
   ngOnInit() {
+    //Added code
+    this.authService.isUserLoggedIn$.subscribe((isLoggedIn) => {
+      this.isAuthenticated = isLoggedIn;
+    });
+    //
+    
     window.addEventListener("resize", this.updateColor);
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
@@ -54,6 +65,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  logout(): void {
+    localStorage.removeItem("token");
+    this.authService.isUserLoggedIn$.next(false);
+    this.router.navigate(["/#/login"]);
+  }
+
 
   collapse() {
     this.isCollapsed = !this.isCollapsed;
