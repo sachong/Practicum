@@ -12,10 +12,12 @@ import { ErrorHandlerService } from "./error-handler.service";
   providedIn: "root",
 })
 export class AuthService {
-  private url = "http://localhost:3000/auth";
+  private url = "http://localhost:3000/auth"; // to be changed for Nodejs url "url"/auth
 
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id">;
+  userLevel: Pick<User, "level">;
+ 
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -42,14 +44,17 @@ export class AuthService {
   ): Observable<{
     token: string;
     userId: Pick<User, "id">;
+    // userLevel: string;
+
   }> {
     return this.http
       .post(`${this.url}/login`, { email, password }, this.httpOptions)
       .pipe(
         first(),
-        tap((tokenObject: { token: string; userId: Pick<User, "id"> }) => {
+        tap((tokenObject: { token: string; userId: Pick<User, "id">; userRole: string }) => {
           this.userId = tokenObject.userId;
           localStorage.setItem("token", tokenObject.token);
+          localStorage.setItem("role", tokenObject.userRole);
           this.isUserLoggedIn$.next(true);
           this.router.navigate(["posts"]);
         }),

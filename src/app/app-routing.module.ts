@@ -16,9 +16,8 @@ const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
-  { path: "dashboard", component: AdminLayoutComponent, pathMatch: "full"},
   {
-    path: "",
+    path: "dashboard",
     redirectTo: "dashboard",
     pathMatch: "full"
   },

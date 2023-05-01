@@ -9,10 +9,10 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
-    path: "/dashboard",
-    title: "Dashboard",
+    path: "/heatmap",
+    title: "Heatmap",
     rtlTitle: "لوحة القيادة",
-    icon: "icon-chart-pie-36",
+    icon: "icon-world",
     class: ""
   },
   {
@@ -21,6 +21,7 @@ export const ROUTES: RouteInfo[] = [
     rtlTitle: "خرائط",
     icon: "icon-pin",
     class: "" },
+  /*
   {
     path: "/notifications",
     title: "Notifications",
@@ -28,6 +29,7 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-bell-55",
     class: ""
   },
+  */
   {
     path: "/user",
     title: "User Profile",
@@ -35,10 +37,42 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-single-02",
     class: ""
   },
-
   {
     path: "/login",
-    title: "Login!",
+    title: "Log out",
+    rtlTitle: " ",
+    icon: "icon-single-02",
+    class: ""
+  }
+];
+
+export const ROUTESUser: RouteInfo[] = [
+  {
+    path: "/heatmap",
+    title: "Heatmap",
+    rtlTitle: "لوحة القيادة",
+    icon: "icon-world",
+    class: ""
+  },
+  /*
+  {
+    path: "/notifications",
+    title: "Notifications",
+    rtlTitle: "إخطارات",
+    icon: "icon-bell-55",
+    class: ""
+  },
+  */
+  {
+    path: "/user",
+    title: "User Profile",
+    rtlTitle: "ملف تعريفي للمستخدم",
+    icon: "icon-single-02",
+    class: ""
+  },
+  {
+    path: "/login",
+    title: "Log out",
     rtlTitle: " ",
     icon: "icon-single-02",
     class: ""
@@ -56,7 +90,12 @@ export class SidebarComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    const value = localStorage.getItem('role');
+    if(value == 'admin'){
+      this.menuItems = ROUTES.filter(menuItem => menuItem);
+    }else{
+      this.menuItems = ROUTESUser.filter(menuItem => menuItem);
+    }
   }
   isMobileMenu() {
     if (window.innerWidth > 991) {
