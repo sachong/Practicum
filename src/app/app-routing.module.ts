@@ -12,22 +12,19 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
+import { AuthGuard } from "./services/auth.guard";
+
 const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
-  {
-    path: "dashboard",
-    redirectTo: "dashboard",
-    pathMatch: "full"
-  },
   {
     path: "",
     component: AdminLayoutComponent,
     children: [
       {
         path: "",
-        loadChildren: () => import ("./layouts/admin-layout/admin-layout.module").then(m => m.AdminLayoutModule)
+        loadChildren: () => import ("./layouts/admin-layout/admin-layout.module").then(m => m.AdminLayoutModule), canActivate: [AuthGuard]
       }
     ]
   }, {
@@ -42,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "dashboard"
+    redirectTo: "dashboard", canActivate: [AuthGuard]
   }
 ];
 

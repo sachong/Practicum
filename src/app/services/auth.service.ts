@@ -29,6 +29,10 @@ export class AuthService {
     private router: Router
   ) {}
 
+  isLoggedIn(){
+    return !!localStorage.getItem('token');
+  }
+
   signup(user: Omit<User, "id">): Observable<User> {
     return this.http
       .post<User>(`${this.url}/signup`, user, this.httpOptions)
