@@ -11,8 +11,8 @@ import { MapService } from "src/app/services/map.service";
   templateUrl: "map.component.html"
 })
 export class MapComponent implements OnInit {
-  lat = 31.75253099985997;
-  lng = -106.40242909183934;
+  lat = 31.77333
+  lng = -106.50410
   zoom = 16;
   isLoading: boolean = false;
   locations: Location [] = []
