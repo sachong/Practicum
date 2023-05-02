@@ -22,6 +22,12 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-pin",
     class: "" },
   {
+    path: "/heatmap",
+    title: "Heatmap",
+    rtlTitle: "خريطة الحرارة",
+    icon: "icon-world",
+    class: "" },
+  {
     path: "/notifications",
     title: "Notifications",
     rtlTitle: "إخطارات",
