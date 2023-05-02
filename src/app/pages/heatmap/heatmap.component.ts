@@ -2,7 +2,7 @@ import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet.heat';
 import { Location } from "src/app/models/location";
-import { MapService } from "src/app/services/map.service";
+import { HeatmapService } from "src/app/services/heatmap.service";
 
 
 
@@ -22,7 +22,7 @@ export class HeatmapComponent implements OnInit{
   locations: Location [] = []
   dates: Date [] = []
 
-  constructor(private mapService: MapService){}
+  constructor(private heatmapService: HeatmapService){}
 
   ngOnInit(): void {
     this.getLocation();
@@ -31,7 +31,7 @@ export class HeatmapComponent implements OnInit{
   
 
   getLocation(){
-    this.mapService.getLocations().subscribe(
+    this.heatmapService.getLocations().subscribe(
       (locations: Location[]) => {
         this.locations = locations;
       },

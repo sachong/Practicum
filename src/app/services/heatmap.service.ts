@@ -11,7 +11,7 @@ import { map, Observable } from 'rxjs';
 export class HeatmapService {
     constructor (private httpClient: HttpClient){} 
 
-    getHits(): Observable<Location[]> {
+    getLocations(): Observable<Location[]> {
         var apiUrl = 'http://127.0.0.1:5000/get_location';
         return this.httpClient.get<Location[]>(apiUrl).pipe(
           map(locations => locations.map(location => ({
@@ -24,3 +24,6 @@ export class HeatmapService {
         );
       }
     }
+
+    //TODO
+    //getDate() to be able to sort by dates
