@@ -12,12 +12,12 @@ export class FlightPlanService {
   constructor(private httpClient: HttpClient) {}
   
   saveFlightPlan(flightPlan: FlightPlan): Observable<any> {
-    var apiUrl = 'http://127.0.0.1:5000/save_flight_plan';
+    var apiUrl = 'http://129.153.95.231:8080/save_flight_plan';
     return this.httpClient.post(apiUrl, flightPlan);
   }
 
   executeFlightPlan(flightPlan: FlightPlan): Observable<any> {
-    var apiUrl = 'http://127.0.0.1:5000/send_flight_plan';
+    var apiUrl = 'http://129.153.95.231:8080/send_flight_plan';
     return this.httpClient.post(apiUrl, flightPlan);
   }
 }
