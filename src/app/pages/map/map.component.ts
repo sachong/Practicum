@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { FlightPlan , FlightPlanCommand } from '../../models/flight-plan.model'
+import { Component, OnInit } from '@angular/core';
+import { FlightPlan, FlightPlanCommand } from '../../models/flight-plan.model';
 import { FlightPlanService } from '../../services/flight-plan.service';
-import { Location } from "src/app/models/location";
-import { MapService } from "src/app/services/map.service";
-
+import { Location } from 'src/app/models/location';
+import { MapService } from 'src/app/services/map.service';
+import * as FileSaver from 'file-saver';
 @Component({
   selector: "app-map",
   templateUrl: "map.component.html"
@@ -56,60 +56,62 @@ export class MapComponent implements OnInit {
   }
 
 
-  generateFlightPlan(){
+  generateFlightPlan() {
     const flightplan: FlightPlan = {
-      locationID: this.loc,
-      flightPlan: [],
+      id: 0, // Assign an appropriate value for the id
+      LocationID: this.loc,
+      FlightPlanJSON: [],
+      name: '', // Assign an appropriate value for the name
     };
 
     for (const marker of this.markers) {
-      flightplan.flightPlan.push({
+      flightplan.FlightPlanJSON.push({
         latitude: marker.lat,
         longitude: marker.lng,
         altitude: 10,
       });
-    } // Add missing closing brace
+    }
 
     this.isLoading = true;
 
     this.flightPlanService.saveFlightPlan(flightplan).subscribe(
       (response) => {
-        console.log("Flight plan saved:", response);
+        console.log('Flight plan saved:', response);
         this.isLoading = false;
         this.clearMap();
       },
       (error) => {
-        console.error("Error saving flight plan:", error);
+        console.error('Error saving flight plan:', error);
         this.isLoading = false;
       }
     );
   }
 
   executeFlight() {
-   
-    const flightplan: FlightPlan = {
-      locationID: this.loc,
-      flightPlan: [],
-    };
-
-    for (const marker of this.markers) {
-      flightplan.flightPlan.push({
-        latitude: marker.lat,
-        longitude: marker.lng,
-        altitude: 10,
-      });
-    } // Add missing closing brace
+    if (!this.loc) {
+      console.error('Location ID is not set.');
+      return;
+    }
 
     this.isLoading = true;
 
-    this.flightPlanService.executeFlightPlan(flightplan).subscribe(
-      (response) => {
-        console.log("Flight plan saved:", response);
-        this.isLoading = false;
-        this.clearMap();
+    this.mapService.getPaths(this.loc).subscribe(
+      (flightPlans: FlightPlan[]) => {
+        if (flightPlans.length > 0) {
+          const selectedFlightPlan = flightPlans[0]; 
+          const json = JSON.stringify(selectedFlightPlan.FlightPlanJSON);
+          const blob = new Blob([json], { type: 'application/json' });
+          FileSaver.saveAs(blob, 'flight_plan.json');
+
+          this.isLoading = false;
+          this.clearMap();
+        } else {
+          console.error('No flight plans found for the selected location.');
+          this.isLoading = false;
+        }
       },
       (error) => {
-        console.error("Error saving flight plan:", error);
+        console.error('Error retrieving flight plans:', error);
         this.isLoading = false;
       }
     );

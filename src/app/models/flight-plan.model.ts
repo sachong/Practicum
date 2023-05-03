@@ -5,6 +5,9 @@ export interface FlightPlanCommand {
   }
   
   export interface FlightPlan {
-    flightPlan: FlightPlanCommand[];
-    locationID: number;
+    id: number;
+    LocationID: number;
+    FlightPlanJSON: FlightPlanCommand[];
+    name: string;
+    
   }
