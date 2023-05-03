@@ -4,6 +4,7 @@ import { FlightPlanService } from '../../services/flight-plan.service';
 import { Location } from 'src/app/models/location';
 import { MapService } from 'src/app/services/map.service';
 import * as FileSaver from 'file-saver';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: "app-map",
   templateUrl: "map.component.html"
@@ -19,7 +20,8 @@ export class MapComponent implements OnInit {
 
   constructor(
     private flightPlanService: FlightPlanService,
-    private mapService: MapService
+    private mapService: MapService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -92,19 +94,29 @@ export class MapComponent implements OnInit {
       console.error('Location ID is not set.');
       return;
     }
-
+  
     this.isLoading = true;
-
+  
     this.mapService.getPaths(this.loc).subscribe(
       (flightPlans: FlightPlan[]) => {
         if (flightPlans.length > 0) {
-          const selectedFlightPlan = flightPlans[0]; 
+          const selectedFlightPlan = flightPlans[0];
           const json = JSON.stringify(selectedFlightPlan.FlightPlanJSON);
           const blob = new Blob([json], { type: 'application/json' });
           FileSaver.saveAs(blob, 'flight_plan.json');
-
-          this.isLoading = false;
-          this.clearMap();
+  
+          // Call the local Flask server to execute the flight plan
+          this.http.post('http://localhost:5000/execute-flight-plan', {}).subscribe(
+            (response) => {
+              console.log("Flight plan executed:", response);
+              this.isLoading = false;
+              this.clearMap();
+            },
+            (error) => {
+              console.error("Error executing flight plan:", error);
+              this.isLoading = false;
+            }
+          );
         } else {
           console.error('No flight plans found for the selected location.');
           this.isLoading = false;
