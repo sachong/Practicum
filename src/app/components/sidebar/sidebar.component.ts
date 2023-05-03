@@ -89,6 +89,7 @@ export class SidebarComponent implements OnInit {
 
   constructor() {}
 
+
   ngOnInit() {
     const value = localStorage.getItem('role');
     if(value == 'admin'){
